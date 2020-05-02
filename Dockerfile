@@ -13,10 +13,8 @@ COPY . .
 # Install package dependencies
 RUN npm install
 
-#
+# Build the add-in
 RUN npm run build
-# If you are building your code for production
-# RUN npm ci --only=production
 
 # Expose the port 3000
 EXPOSE 3000
