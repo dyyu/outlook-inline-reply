@@ -51,6 +51,21 @@ module.exports = async (env, options) => {
         {
           to: "taskpane.css",
           from: "./src/taskpane/taskpane.css"
+        },
+        {
+          to: "manifest.xml",
+          from: "./manifest.xml",
+          transform(content) {
+            var url = 'localhost'
+            if(env && env.PRODUCTION_URL) {
+              url = env.PRODUCTION_URL;
+            }
+            return content.toString().replace(/localhost:3000/g, url);
+          }
+        },
+        {
+          to: "assets",
+          from: "./assets"
         }
       ]),
       new HtmlWebpackPlugin({
