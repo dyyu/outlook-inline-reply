@@ -14,8 +14,7 @@ COPY . .
 RUN npm install
 
 # Build the add-in
-ARG PRODUCTION_URL=localhost
-RUN npm run build -- --env.PRODUCTION_URL=${PRODUCTION_URL}
+RUN npm run build
 
 # Expose the port 3000
 EXPOSE 3000

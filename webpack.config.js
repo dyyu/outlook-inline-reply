@@ -55,13 +55,15 @@ module.exports = async (env, options) => {
         {
           to: "manifest.xml",
           from: "./manifest.xml",
+          /*
           transform(content) {
-            var url = 'localhost'
-            if(env && env.PRODUCTION_URL) {
-              url = env.PRODUCTION_URL;
+            var url = 'localhost:3000'
+            if(env && env.WEBSITE_HOSTNAME) {
+              url = env.WEBSITE_HOSTNAME;
             }
             return content.toString().replace(/localhost:3000/g, url);
           }
+          */
         },
         {
           to: "assets",
