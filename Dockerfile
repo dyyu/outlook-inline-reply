@@ -11,10 +11,7 @@ WORKDIR /usr/src/app
 COPY . .
 
 # Install package dependencies
-RUN npm install
-
-# Build the add-in
-RUN npm run build
+RUN npm install --production
 
 # Expose the port 3000
 EXPOSE 3000
