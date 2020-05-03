@@ -1,6 +1,7 @@
 # Outlook Inline Reply
 
 ![Node.js CI](https://github.com/dyyu/outlook-inline-reply/workflows/Node.js%20CI/badge.svg)
+![Docker Image CI](https://github.com/dyyu/outlook-inline-reply/workflows/Docker%20Image%20CI/badge.svg)
 
 This is an add-in for Outlook 365 that provides a traditional style inline reply.
 Currently, it supports Outlook Desktop and Outlook Web.
