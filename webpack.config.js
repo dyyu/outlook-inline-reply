@@ -56,6 +56,14 @@ module.exports = async (env, options)  => {
         {
           to: "taskpane.css",
           from: "./src/taskpane/taskpane.css"
+        },
+        {
+          to: "manifest.xml",
+          from: "./manifest.xml"
+        },
+        {
+          to: "assets",
+          from: "./assets"
         }
       ]),
       new ExtractTextPlugin('[name].[hash].css'),

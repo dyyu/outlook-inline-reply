@@ -1,9 +1,9 @@
 {
-  "name": "office-addin-taskpane-react",
-  "version": "0.0.1",
+  "name": "outlook-inline-reply",
+  "version": "0.0.2",
   "repository": {
     "type": "git",
-    "url": "https://github.com/OfficeDev/Office-Addin-TaskPane-React.git"
+    "url": "https://github.com/dyyu/outlook-inline-reply.git"
   },
   "license": "MIT",
   "config": {
@@ -21,6 +21,7 @@
     "prettier": "office-addin-lint prettier",
     "start": "office-addin-debugging start manifest.xml",
     "start:desktop": "office-addin-debugging start manifest.xml desktop",
+    "start:http": "sed -r -i \"s/(localhost:3000)/${WEBSITE_HOSTNAME:-\\1}/g\" ./dist/manifest.xml && http-server dist -p 3000",
     "start:web": "office-addin-debugging start manifest.xml web",
     "stop": "office-addin-debugging stop manifest.xml",
     "validate": "office-addin-manifest validate manifest.xml",
