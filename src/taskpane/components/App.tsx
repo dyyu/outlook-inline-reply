@@ -1,7 +1,6 @@
 import * as React from "react";
-import { Button, ButtonType } from "office-ui-fabric-react";
+import { Stack, Toggle, TooltipHost, Icon, TextField, IStackStyles, CommandBarButton } from "office-ui-fabric-react";
 import Header from "./Header";
-import HeroList, { HeroListItem } from "./HeroList";
 import Progress from "./Progress";
 /* global Button, Header, HeroList, HeroListItem, Progress */
 
@@ -11,41 +10,32 @@ export interface AppProps {
 }
 
 export interface AppState {
-  listItems: HeroListItem[];
+  reformatCount: Number;
 }
+
+const stackTokens = { childrenGap: 10 };
+
+export interface IButtonExampleProps {
+  // These are set based on the toggles shown above the examples (not needed in real code)
+  disabled?: boolean;
+  checked?: boolean;
+}
+
+const stackStyles: Partial<IStackStyles> = { root: { height: 44 } };
 
 export default class App extends React.Component<AppProps, AppState> {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      listItems: []
+      reformatCount: 0
     };
   }
 
   componentDidMount() {
     this.setState({
-      listItems: [
-        {
-          icon: "Ribbon",
-          primaryText: "Achieve more with Office integration"
-        },
-        {
-          icon: "Unlock",
-          primaryText: "Unlock features and functionality"
-        },
-        {
-          icon: "Design",
-          primaryText: "Create and visualize like a pro"
-        }
-      ]
+      reformatCount: 0
     });
   }
-
-  click = async () => {
-    /**
-     * Insert your Outlook code here
-     */
-  };
 
   render() {
     const { title, isOfficeInitialized } = this.props;
@@ -57,21 +47,49 @@ export default class App extends React.Component<AppProps, AppState> {
     }
 
     return (
-      <div className="ms-welcome">
-        <Header logo="assets/logo-filled.png" title={this.props.title} message="Welcome" />
-        <HeroList message="Discover what Office Add-ins can do for you today!" items={this.state.listItems}>
-          <p className="ms-font-l">
-            Modify the source files, then click <b>Run</b>.
-          </p>
-          <Button
-            className="ms-welcome__action"
-            buttonType={ButtonType.hero}
-            iconProps={{ iconName: "ChevronRight" }}
-            onClick={this.click}
-          >
-            Run
-          </Button>
-        </HeroList>
+      <div>
+        <Header logo="assets/logo-filled.png" title={this.props.title} message="Preferences" />
+
+        <Stack horizontal styles={stackStyles}>
+          <CommandBarButton iconProps={{ iconName: "Save" }} text="Save" />
+          <CommandBarButton iconProps={{ iconName: "Refresh" }} text="Refresh" />
+          <CommandBarButton iconProps={{ iconName: "AppIconDefault" }} text="Load defaults" />
+        </Stack>
+
+        {/* Preference items */}
+        <main className="ms-welcome__main">
+          <Stack tokens={stackTokens}>
+            <Toggle
+              label={
+                <div>
+                  Replace quoted email header{" "}
+                  <TooltipHost content="Explain Feature">
+                    <Icon iconName="Info" aria-label="Info tooltip" />
+                  </TooltipHost>
+                </div>
+              }
+              onText="On"
+              offText="Off"
+            />
+
+            <Toggle
+              label={
+                <div>
+                  Remove warnings about external emails{" "}
+                  <TooltipHost content="Explain Feature">
+                    <Icon iconName="Info" aria-label="Info tooltip" />
+                  </TooltipHost>
+                </div>
+              }
+              onText="On"
+              offText="Off"
+            />
+
+            <TextField label="Sample of your external email warning:" multiline autoAdjustHeight />
+          </Stack>
+
+          {/* Buttons */}
+        </main>
       </div>
     );
   }

@@ -97,13 +97,13 @@
       <bt:ShortStrings>
         <bt:String id="GroupLabel" DefaultValue="Inline Reply"/>
         <bt:String id="TaskpaneButton.Label" DefaultValue="Preferences"/>
-        <bt:String id="TaskpaneButton.Title" DefaultValue="Preferences"/>
-        <bt:String id="FunctionButton.Label" DefaultValue="Reformat Email"/>
-        <bt:String id="FunctionButton.Title" DefaultValue="Reformat Email"/>
+        <bt:String id="TaskpaneButton.Title" DefaultValue="Displays the preferences page"/>
+        <bt:String id="FunctionButton.Label" DefaultValue="Reformat email"/>
+        <bt:String id="FunctionButton.Title" DefaultValue="Reformats the email using inline reply"/>
       </bt:ShortStrings>
       <bt:LongStrings>
-        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Displays the preferences page."/>
-        <bt:String id="FunctionButton.Tooltip" DefaultValue="Reformats the email using inline reply."/>
+        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Displays the preferences page"/>
+        <bt:String id="FunctionButton.Tooltip" DefaultValue="Reformats the email using inline reply"/>
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>

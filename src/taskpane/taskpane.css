@@ -78,3 +78,16 @@
 b {
     font-weight: bold;
 }
+
+.divider{
+    width: 10px;
+    height: auto;
+    display: inline-block;
+}
+
+.footer {
+    bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ }
