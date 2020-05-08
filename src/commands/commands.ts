@@ -3,15 +3,15 @@
  * Modified work Copyright dyyu. All rights reserved. Licensed under the MIT license.
  * See LICENSE in the project root for license information.
  */
+import { addQuoteToEmailBody } from "./formatter";
 /* global Office, self, window */
-
 // The initialize function must be run each time a new page is loaded.
 Office.initialize = function(reason) {
   self.console.info("Office.initialize: " + reason);
 };
 
 Office.onReady(() => {
-  self.console.info("Office.onReady");
+  self.console.info("Office.onReady, preferences:", Office.context.roamingSettings.get("preferences"));
   // If needed, Office.js is ready to be called
 });
 
@@ -40,9 +40,10 @@ function reformatEmail(event) {
       // Add the quotes
       if (emailFormat == Office.CoercionType.Html) {
         // Add the blockquote tag
-        var blockquoteTag =
-          '<blockquote class="x_gmail_quote" style="margin:0px 0px 0px 0.8ex; border-left:1px solid rgb(204,204,204); padding-left:1ex">';
-        var newBody = blockquoteTag + result.value + "</blockquote>";
+        // var blockquoteTag =
+        //   '<blockquote class="x_gmail_quote" style="margin:0px 0px 0px 0.8ex; border-left:1px solid rgb(204,204,204); padding-left:1ex">';
+        // var newBody = blockquoteTag + result.value + "</blockquote>";
+        var newBody = addQuoteToEmailBody(result.value);
       } else if (emailFormat == Office.CoercionType.Text) {
         // TODO: handle plain text email
       }
@@ -54,7 +55,7 @@ function reformatEmail(event) {
         // Show a notification message
         item.notificationMessages.replaceAsync(
           "reformatEmail",
-          notificationMessage("Email is now reformatted for inline reply.")
+          getNotificationMessage("Email is now reformatted for inline reply.")
         );
 
         // Be sure to indicate when the add-in command function is complete
@@ -64,7 +65,7 @@ function reformatEmail(event) {
   });
 }
 
-function notificationMessage(message) {
+function getNotificationMessage(message) {
   return {
     type: Office.MailboxEnums.ItemNotificationMessageType.InformationalMessage,
     message: message,
