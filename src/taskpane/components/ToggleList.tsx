@@ -10,16 +10,15 @@ export interface ToggleListItem {
 export interface ToggleListProps {
   items: ToggleListItem[];
   checked: {};
-  onChange: any;
+  handler: any;
 }
 
 export default class ToggleList extends React.Component<ToggleListProps> {
   render() {
-    const { items, checked, onChange } = this.props;
+    const { items, checked, handler } = this.props;
 
     const listItems = items.map((item, index) => (
       <Toggle
-        itemID={item.name}
         key={index}
         label={
           <div>
@@ -32,7 +31,7 @@ export default class ToggleList extends React.Component<ToggleListProps> {
         onText="On"
         offText="Off"
         checked={checked[item.name]}
-        onChange={() => onChange(item.name, checked[item.name])}
+        onChange={() => handler(item.name, !checked[item.name])}
       />
     ));
     return <ul className="ms-List ms-welcome__features ms-u-slideUpIn10">{listItems}</ul>;
