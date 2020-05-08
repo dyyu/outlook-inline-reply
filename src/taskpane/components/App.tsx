@@ -39,7 +39,7 @@ var toggleListItems: ToggleListItem[] = [
   {
     name: "replaceHeader",
     label: "Replace quoted email header",
-    tooltip: "Use a shortened format (on ... someone wrote) instead of Outlook's full header." 
+    tooltip: "Use a shortened format (On DATE at TIME, NAME <EMAIL> wrote:) instead of Outlook's full header."
   },
   {
     name: "removeExternalWarning",
@@ -142,7 +142,6 @@ export default class App extends React.Component<AppProps, AppState> {
         {/* Preference items */}
         <main className="ms-welcome__main">
           <Stack tokens={{ childrenGap: 10 }}>
-
             {/* Toggle controls */}
             <ToggleList items={toggleListItems} checked={this.state.preferences} handler={this.updatePreference} />
 
@@ -155,7 +154,6 @@ export default class App extends React.Component<AppProps, AppState> {
               buttonText="Save"
               handler={this.updatePreference}
             />
-
           </Stack>
         </main>
       </div>
