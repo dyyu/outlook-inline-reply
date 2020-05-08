@@ -18,8 +18,8 @@
  
  .ms-welcome__header {
     padding: 20px;
-    padding-bottom: 30px;
-    padding-top: 100px;
+    /* padding-bottom: 30px;
+    padding-top: 100px; */
     display: -webkit-flex;
     display: flex;
     -webkit-flex-direction: column;
@@ -78,3 +78,16 @@
 b {
     font-weight: bold;
 }
+
+.divider{
+    width: 10px;
+    height: auto;
+    display: inline-block;
+}
+
+.footer {
+    bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ }
