@@ -3,15 +3,16 @@
  * Modified work Copyright dyyu. All rights reserved. Licensed under the MIT license.
  * See LICENSE in the project root for license information.
  */
-import { addQuoteToEmailBody } from "./formatter";
+import { reformatEmailBody } from "./formatter";
 /* global Office, self, window */
+
 // The initialize function must be run each time a new page is loaded.
 Office.initialize = function(reason) {
   self.console.info("Office.initialize: " + reason);
 };
 
 Office.onReady(() => {
-  self.console.info("Office.onReady, preferences:", Office.context.roamingSettings.get("preferences"));
+  self.console.info("Office.onReady");
   // If needed, Office.js is ready to be called
 });
 
@@ -20,6 +21,12 @@ Office.onReady(() => {
  * @param event {Office.AddinCommands.Event}
  */
 function reformatEmail(event) {
+
+  // Fetch user preferences
+  var preferences = Office.context.roamingSettings.get("preferences");
+  self.console.info("Preferences:", preferences);
+
+  // Create shorthands
   var item = Office.context.mailbox.item;
 
   // Check whether the body is plaintext or html
@@ -39,11 +46,7 @@ function reformatEmail(event) {
 
       // Add the quotes
       if (emailFormat == Office.CoercionType.Html) {
-        // Add the blockquote tag
-        // var blockquoteTag =
-        //   '<blockquote class="x_gmail_quote" style="margin:0px 0px 0px 0.8ex; border-left:1px solid rgb(204,204,204); padding-left:1ex">';
-        // var newBody = blockquoteTag + result.value + "</blockquote>";
-        var newBody = addQuoteToEmailBody(result.value);
+        var newBody = reformatEmailBody(result.value, preferences);
       } else if (emailFormat == Office.CoercionType.Text) {
         // TODO: handle plain text email
       }
