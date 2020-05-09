@@ -1,5 +1,6 @@
 import * as React from "react";
-import { TextField, ActionButton } from "office-ui-fabric-react";
+import { TextField } from "office-ui-fabric-react/lib/TextField";
+import { ActionButton } from "office-ui-fabric-react/lib/Button";
 
 export default class TextFieldWithButtons extends React.Component<
   {

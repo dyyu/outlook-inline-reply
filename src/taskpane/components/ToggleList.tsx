@@ -1,5 +1,7 @@
 import * as React from "react";
-import { Toggle, TooltipHost, Icon } from "office-ui-fabric-react";
+import { Toggle } from "office-ui-fabric-react/lib/Toggle";
+import { TooltipHost } from "office-ui-fabric-react/lib/Tooltip";
+import { Icon } from "office-ui-fabric-react/lib/Icon";
 
 export interface ToggleListItem {
   name: string;

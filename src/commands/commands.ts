@@ -21,7 +21,6 @@ Office.onReady(() => {
  * @param event {Office.AddinCommands.Event}
  */
 function reformatEmail(event) {
-
   // Fetch user preferences
   var preferences = Office.context.roamingSettings.get("preferences");
   self.console.info("Preferences:", preferences);

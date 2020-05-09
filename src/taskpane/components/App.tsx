@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Stack, CommandBarButton } from "office-ui-fabric-react";
+import { Stack } from "office-ui-fabric-react/lib/Stack";
+import { CommandBarButton } from "office-ui-fabric-react/lib/Button";
 import Header from "./Header";
 import Progress from "./Progress";
 import ToggleList, { ToggleListItem } from "./ToggleList";
