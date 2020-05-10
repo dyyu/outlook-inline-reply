@@ -18,7 +18,10 @@ Office.onReady(() => {
 
 /**
  * Shows a notification when the add-in command is executed.
- * @param event {Office.AddinCommands.Event}
+ *
+ * @param {Office.AddinCommands.Event} event
+ *        Context information for this UI-less command
+ *
  */
 function reformatEmail(event) {
   // Fetch user preferences
@@ -67,7 +70,16 @@ function reformatEmail(event) {
   });
 }
 
-function getNotificationMessage(message) {
+/**
+ * Returns an object containing the notifcation settings
+ *
+ * @param {string} message
+ *        Text message to show in the notification
+ *
+ * @returns {object}
+ *          The objecting containing notification info
+ */
+function getNotificationMessage(message: string) {
   return {
     type: Office.MailboxEnums.ItemNotificationMessageType.InformationalMessage,
     message: message,
@@ -76,6 +88,12 @@ function getNotificationMessage(message) {
   };
 }
 
+/**
+ * Gets the global scope
+ *
+ * @returns {window}
+ *          The global scope
+ */
 function getGlobal() {
   return typeof self !== "undefined"
     ? self

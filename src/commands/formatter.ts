@@ -1,4 +1,15 @@
-export function reformatEmailBody(body: string, preferences: {}) {
+/**
+ * Reformats an email body to support inline replies
+ *
+ * @param {string} body
+ *        The email body
+ * @param {object} preferences
+ *        User preferences
+ *
+ * @returns {string}
+ *          The modified email body
+ */
+export function reformatEmailBody(body: string, preferences: object): string {
   console.log("reformatEmailBody: received preferences", preferences);
 
   // Remove email header if preferred
@@ -11,7 +22,18 @@ export function reformatEmailBody(body: string, preferences: {}) {
   return newBody;
 }
 
-export function addQuotesToEmail(content, format = "html") {
+/**
+ * Adds quotes to an email content
+ *
+ * @param {string} content
+ *        The content of the email
+ * @param {string} format
+ *        The format of the email
+ *
+ * @returns {string}
+ *          The quoted email content
+ */
+export function addQuotesToEmail(content, format = "html"): string {
   // If HTML, add blockquote
   // If plain text, remove redundant new lines if preferred, and then add "> " in front of everyline
   format;
