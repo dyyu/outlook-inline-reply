@@ -3,7 +3,8 @@
   "plugins": [
     "react",
     "@typescript-eslint",
-    "office-addins"
+    "office-addins",
+    "jsdoc"
   ],
   "parserOptions": {
     "ecmaVersion": 6,
@@ -14,7 +15,8 @@
     "project": "./tsconfig.json"
   },
   "extends": [
-    "plugin:office-addins/react"
+    "plugin:office-addins/react",
+    "plugin:jsdoc/recommended"
   ],
   "settings": {
     "react": {

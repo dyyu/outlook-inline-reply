@@ -3,6 +3,7 @@
  * Modified work Copyright dyyu. All rights reserved. Licensed under the MIT license.
  * See LICENSE in the project root for license information.
  */
+import { reformatEmailBody } from "./formatter";
 /* global Office, self, window */
 
 // The initialize function must be run each time a new page is loaded.
@@ -17,9 +18,17 @@ Office.onReady(() => {
 
 /**
  * Shows a notification when the add-in command is executed.
- * @param event {Office.AddinCommands.Event}
+ *
+ * @param {Office.AddinCommands.Event} event
+ *        Context information for this UI-less command
+ *
  */
 function reformatEmail(event) {
+  // Fetch user preferences
+  var preferences = Office.context.roamingSettings.get("preferences");
+  self.console.info("Preferences:", preferences);
+
+  // Create shorthands
   var item = Office.context.mailbox.item;
 
   // Check whether the body is plaintext or html
@@ -39,10 +48,7 @@ function reformatEmail(event) {
 
       // Add the quotes
       if (emailFormat == Office.CoercionType.Html) {
-        // Add the blockquote tag
-        var blockquoteTag =
-          '<blockquote class="x_gmail_quote" style="margin:0px 0px 0px 0.8ex; border-left:1px solid rgb(204,204,204); padding-left:1ex">';
-        var newBody = blockquoteTag + result.value + "</blockquote>";
+        var newBody = reformatEmailBody(result.value, preferences);
       } else if (emailFormat == Office.CoercionType.Text) {
         // TODO: handle plain text email
       }
@@ -54,7 +60,7 @@ function reformatEmail(event) {
         // Show a notification message
         item.notificationMessages.replaceAsync(
           "reformatEmail",
-          notificationMessage("Email is now reformatted for inline reply.")
+          getNotificationMessage("Email is now reformatted for inline reply.")
         );
 
         // Be sure to indicate when the add-in command function is complete
@@ -64,7 +70,16 @@ function reformatEmail(event) {
   });
 }
 
-function notificationMessage(message) {
+/**
+ * Returns an object containing the notifcation settings
+ *
+ * @param {string} message
+ *        Text message to show in the notification
+ *
+ * @returns {object}
+ *          The objecting containing notification info
+ */
+function getNotificationMessage(message: string) {
   return {
     type: Office.MailboxEnums.ItemNotificationMessageType.InformationalMessage,
     message: message,
@@ -73,6 +88,12 @@ function notificationMessage(message) {
   };
 }
 
+/**
+ * Gets the global scope
+ *
+ * @returns {window}
+ *          The global scope
+ */
 function getGlobal() {
   return typeof self !== "undefined"
     ? self

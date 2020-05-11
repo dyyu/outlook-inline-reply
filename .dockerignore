@@ -1,4 +1,6 @@
+**/.git
 .github
 .vscode
 .yo-repository
+dist
 node_modules

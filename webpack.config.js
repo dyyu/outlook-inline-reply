@@ -1,26 +1,19 @@
 const devCerts = require("office-addin-dev-certs");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const webpack = require('webpack');
+const webpack = require("webpack");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
-module.exports = async (env, options)  => {
+module.exports = async (env, options) => {
   const dev = options.mode === "development";
   const config = {
     devtool: "source-map",
     entry: {
-      vendor: [
-        'react',
-        'react-dom',
-        'core-js',
-        'office-ui-fabric-react'
-    ],
-    taskpane: [
-        'react-hot-loader/patch',
-        './src/taskpane/index.tsx',
-    ],
-    commands: './src/commands/commands.ts'
+      vendor: ["react", "react-dom", "core-js", "office-ui-fabric-react"],
+      taskpane: ["react-hot-loader/patch", "./src/taskpane/index.tsx"],
+      commands: "./src/commands/commands.ts"
     },
     resolve: {
       extensions: [".ts", ".tsx", ".html", ".js"]
@@ -29,27 +22,24 @@ module.exports = async (env, options)  => {
       rules: [
         {
           test: /\.tsx?$/,
-          use: [
-              'react-hot-loader/webpack',
-              'ts-loader'
-          ],
+          use: ["react-hot-loader/webpack", "ts-loader"],
           exclude: /node_modules/
         },
         {
           test: /\.css$/,
-          use: ['style-loader', 'css-loader']
+          use: ["style-loader", "css-loader"]
         },
         {
           test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
           use: {
-              loader: 'file-loader',
-              query: {
-                  name: 'assets/[name].[ext]'
-                }
-              }  
-            }   
-          ]
-    },    
+            loader: "file-loader",
+            query: {
+              name: "assets/[name].[ext]"
+            }
+          }
+        }
+      ]
+    },
     plugins: [
       new CleanWebpackPlugin(),
       new CopyWebpackPlugin([
@@ -66,34 +56,35 @@ module.exports = async (env, options)  => {
           from: "./assets"
         }
       ]),
-      new ExtractTextPlugin('[name].[hash].css'),
+      new ExtractTextPlugin("[name].[hash].css"),
       new HtmlWebpackPlugin({
         filename: "taskpane.html",
-          template: './src/taskpane/taskpane.html',
-          chunks: ['taskpane', 'vendor', 'polyfills']
+        template: "./src/taskpane/taskpane.html",
+        chunks: ["taskpane", "vendor", "polyfills"]
       }),
       new HtmlWebpackPlugin({
-          filename: "commands.html",
-          template: "./src/commands/commands.html",
-          chunks: ["commands"]
+        filename: "commands.html",
+        template: "./src/commands/commands.html",
+        chunks: ["commands"]
       }),
       new CopyWebpackPlugin([
-          {
-              from: './assets',
-              ignore: ['*.scss'],
-              to: 'assets',
-          }
+        {
+          from: "./assets",
+          ignore: ["*.scss"],
+          to: "assets"
+        }
       ]),
       new webpack.ProvidePlugin({
         Promise: ["es6-promise", "Promise"]
       })
+      // new BundleAnalyzerPlugin() // Uncomment start bundle analyzer to see library composition
     ],
     devServer: {
       hot: true,
       headers: {
         "Access-Control-Allow-Origin": "*"
-      },      
-      https: (options.https !== undefined) ? options.https : await devCerts.getHttpsServerOptions(),
+      },
+      https: options.https !== undefined ? options.https : await devCerts.getHttpsServerOptions(),
       port: process.env.npm_package_config_dev_server_port || 3000
     }
   };
