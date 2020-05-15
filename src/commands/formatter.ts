@@ -40,7 +40,7 @@ export function reformatEmailBody(body: string, isHtml: boolean, preferences: us
   }
   modifiedBody += "</div>";
 
-  // Remove external sensor warning
+  // Remove external sender warning
   if (preferences.removeExternalWarning)
     contentToQuote = removeExternalSenderWarning(contentToQuote, preferences.externalWarningHtml);
 
