@@ -45,7 +45,7 @@ export function reformatEmailBody(body: string, isHtml: boolean, preferences: us
     contentToQuote = removeExternalSenderWarning(contentToQuote, preferences.externalWarningHtml);
 
   // Add quotes to email
-  var quotedContent = addQuotesToEmail(contentToQuote, "html");
+  var quotedContent = addQuotesToEmail(contentToQuote);
 
   // Combine the new body to return, with a new line for user input
   modifiedBody += quotedContent;
