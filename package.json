@@ -57,6 +57,7 @@
     "css-loader": "^3.0.0",
     "eslint": "^6.0.0",
     "eslint-config-office-addins": "^1.0.14",
+    "eslint-plugin-jest": "^23.13.0",
     "eslint-plugin-jsdoc": "^25.0.1",
     "eslint-plugin-office-addins": "^0.1.1",
     "eslint-plugin-react": "^7.16.0",
