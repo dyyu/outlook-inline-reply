@@ -5,6 +5,7 @@ import Header from "./Header";
 import Progress from "./Progress";
 import ToggleList, { ToggleListItem } from "./ToggleList";
 import TextFieldWithButtons from "./TextFieldWithButtons";
+import * as userSettings from "../../common/userSettings";
 /* global Button, Header, HeroList, HeroListItem, Progress */
 
 export interface AppProps {
@@ -16,14 +17,6 @@ export interface AppState {
   preferences: object;
   statistics: object;
 }
-
-// Default values for the preferences
-var defaultPreferences = {
-  polishPlainText: false,
-  replaceHeader: true,
-  removeExternalWarning: true,
-  externalWarningHtml: ""
-};
 
 // Default values for usage statistics
 var defaultStatistics = {
@@ -53,7 +46,7 @@ export default class App extends React.Component<AppProps, AppState> {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      preferences: defaultPreferences,
+      preferences: userSettings.defaultPreferences,
       statistics: defaultStatistics
     };
   }
@@ -81,14 +74,14 @@ export default class App extends React.Component<AppProps, AppState> {
   refreshRoamingSettings = () => {
     // Set the state from the roaming settings
     this.setState(_prevState => ({
-      preferences: this.readRoamingSettings("preferences", defaultPreferences),
+      preferences: this.readRoamingSettings("preferences", userSettings.defaultPreferences),
       statistics: this.readRoamingSettings("statistics", defaultStatistics)
     }));
   };
 
   loadDefaultPreferences = () => {
     this.setState(_prevState => ({
-      preferences: defaultPreferences
+      preferences: userSettings.defaultPreferences
     }));
   };
 

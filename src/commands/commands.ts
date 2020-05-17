@@ -43,14 +43,11 @@ function reformatEmail(event) {
       // Do nothing if the there's an error getting the body
       if (result.status == Office.AsyncResultStatus.Failed) event.completed();
 
-      // TODO: Replace the quoted email header with a single line:
-      // E.g., On Thursday, April 23, 2020 at 4:15 PM Jane <jane@protonmail.ch> wrote:
-
-      // Add the quotes
+      // Process the email body
       if (emailFormat == Office.CoercionType.Html) {
-        var newBody = reformatEmailBody(result.value, preferences);
+        var newBody = reformatEmailBody(result.value, true, preferences);
       } else if (emailFormat == Office.CoercionType.Text) {
-        // TODO: handle plain text email
+        var newBody = reformatEmailBody(result.value, false, preferences);
       }
 
       // Write to the new body
