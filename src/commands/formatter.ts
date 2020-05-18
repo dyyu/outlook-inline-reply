@@ -35,7 +35,7 @@ export function reformatEmailBody(body: string, isHtml: boolean, preferences: us
   // Extract email header and replace it with "On DATE TIME, NAME <EMAIL> wrote"
   if (preferences.replaceHeader) {
     // Extract the sender and the time from the quoted email
-    var citation = getCitation(contentToQuote);
+    var citation = getEmailCitation(contentToQuote);
     console.log("citation:", citation);
     modifiedBody += citation;
 
@@ -87,7 +87,7 @@ export function getFontStyle(body: string) {
  * @returns {string}
  *          The citation string with the format "On TIMESTAMP, SENDER <EMAIL> wrote:"
  */
-export function getCitation(doc: Document) {
+export function getEmailCitation(doc: Document) {
   var headerParts = doc.getElementById("divRplyFwdMsg").innerHTML.split("<br>");
   console.log("Header:", headerParts);
 
@@ -129,10 +129,10 @@ export function getCitation(doc: Document) {
  *          true on success, false otherwise
  */
 export function removeEmailHeader(doc: Document): boolean {
-  // var pattern = /<hr (.)+>(\n)*<div (.)+(\n)*(<b>(.)+(\n)*)+((.)*\n)<\/div>/;
 
   // Remove the <div id="divRplyFwdMsg" ...> tag
   doc.getElementById("divRplyFwdMsg").remove();
+  doc.getElementById("appendonsend").remove();
 
   // Remove the horizontal rule
   var hrList = doc.getElementsByTagName("hr");
