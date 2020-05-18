@@ -1,25 +1,19 @@
 /* eslint-env browser */
 
-import * as userSettings from "../common/userSettings";
+import * as userSettings from "../common/user-settings";
 
 /**
  * Reformats an email body to support inline replies
  *
  * @param {string} body
  *        The email body
- * @param {boolean} isHtml
- *        True for HTML body, False for plain text
  * @param {userSettings.Preferences} preferences
  *        User preferences
  *
  * @returns {string}
  *          The modified email body
  */
-export function reformatEmailBody(body: string, isHtml: boolean, preferences: userSettings.Preferences): string {
-  if (!isHtml) {
-    console.warn("Not supported yet. Doing nothing.");
-  }
-
+export function reformatEmailHtml(body: string, preferences: userSettings.Preferences): string {
   var parser = new DOMParser();
   var contentToQuote = parser.parseFromString(body, "text/html");
   var modifiedBody = "";
@@ -129,7 +123,6 @@ export function getEmailCitation(doc: Document) {
  *          true on success, false otherwise
  */
 export function removeEmailHeader(doc: Document): boolean {
-
   // Remove the <div id="divRplyFwdMsg" ...> tag
   doc.getElementById("divRplyFwdMsg").remove();
   doc.getElementById("appendonsend").remove();

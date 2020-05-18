@@ -3,7 +3,7 @@
  * Modified work Copyright dyyu. All rights reserved. Licensed under the MIT license.
  * See LICENSE in the project root for license information.
  */
-import { reformatEmailBody } from "./formatter";
+import { reformatEmailHtml } from "./formatter-html";
 /* global Office, self, window */
 
 // The initialize function must be run each time a new page is loaded.
@@ -45,9 +45,9 @@ function reformatEmail(event) {
 
       // Process the email body
       if (emailFormat == Office.CoercionType.Html) {
-        var newBody = reformatEmailBody(result.value, true, preferences);
+        var newBody = reformatEmailHtml(result.value, preferences);
       } else if (emailFormat == Office.CoercionType.Text) {
-        var newBody = reformatEmailBody(result.value, false, preferences);
+        console.error("Not implemented yet.");
       }
 
       // Write to the new body
