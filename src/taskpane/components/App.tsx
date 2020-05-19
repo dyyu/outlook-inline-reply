@@ -5,7 +5,7 @@ import Header from "./Header";
 import Progress from "./Progress";
 import ToggleList, { ToggleListItem } from "./ToggleList";
 import TextFieldWithButtons from "./TextFieldWithButtons";
-import * as userSettings from "../../common/userSettings";
+import * as userSettings from "../../common/user-settings";
 /* global Button, Header, HeroList, HeroListItem, Progress */
 
 export interface AppProps {

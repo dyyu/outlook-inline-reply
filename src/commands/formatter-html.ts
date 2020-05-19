@@ -1,25 +1,19 @@
 /* eslint-env browser */
 
-import * as userSettings from "../common/userSettings";
+import * as userSettings from "../common/user-settings";
 
 /**
  * Reformats an email body to support inline replies
  *
  * @param {string} body
  *        The email body
- * @param {boolean} isHtml
- *        True for HTML body, False for plain text
  * @param {userSettings.Preferences} preferences
  *        User preferences
  *
  * @returns {string}
  *          The modified email body
  */
-export function reformatEmailBody(body: string, isHtml: boolean, preferences: userSettings.Preferences): string {
-  if (!isHtml) {
-    console.warn("Not supported yet. Doing nothing.");
-  }
-
+export function reformatEmailHtml(body: string, preferences: userSettings.Preferences): string {
   var parser = new DOMParser();
   var contentToQuote = parser.parseFromString(body, "text/html");
   var modifiedBody = "";
@@ -35,7 +29,7 @@ export function reformatEmailBody(body: string, isHtml: boolean, preferences: us
   // Extract email header and replace it with "On DATE TIME, NAME <EMAIL> wrote"
   if (preferences.replaceHeader) {
     // Extract the sender and the time from the quoted email
-    var citation = getCitation(contentToQuote);
+    var citation = getEmailCitation(contentToQuote);
     console.log("citation:", citation);
     modifiedBody += citation;
 
@@ -87,7 +81,7 @@ export function getFontStyle(body: string) {
  * @returns {string}
  *          The citation string with the format "On TIMESTAMP, SENDER <EMAIL> wrote:"
  */
-export function getCitation(doc: Document) {
+export function getEmailCitation(doc: Document) {
   var headerParts = doc.getElementById("divRplyFwdMsg").innerHTML.split("<br>");
   console.log("Header:", headerParts);
 
@@ -129,8 +123,6 @@ export function getCitation(doc: Document) {
  *          true on success, false otherwise
  */
 export function removeEmailHeader(doc: Document): boolean {
-  // var pattern = /<hr (.)+>(\n)*<div (.)+(\n)*(<b>(.)+(\n)*)+((.)*\n)<\/div>/;
-
   // Remove the <div id="divRplyFwdMsg" ...> tag
   doc.getElementById("divRplyFwdMsg").remove();
 
