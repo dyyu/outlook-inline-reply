@@ -125,7 +125,6 @@ export function getEmailCitation(doc: Document) {
 export function removeEmailHeader(doc: Document): boolean {
   // Remove the <div id="divRplyFwdMsg" ...> tag
   doc.getElementById("divRplyFwdMsg").remove();
-  doc.getElementById("appendonsend").remove();
 
   // Remove the horizontal rule
   var hrList = doc.getElementsByTagName("hr");
